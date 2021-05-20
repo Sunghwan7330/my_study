@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> 문서 제목 해더 </title>
+	 <style>
+html, body { margin: 0; padding: 0; height: 100%; }
+.header { width: 100%; height: 15%; 
+		background: yellow; }
+.nav { width: 15%; height: 70%; float: left; 
+		background: orange; }
+.section { width: 70%; height: 70%; float: left; 
+		background: olivedrab; }
+.aside { width: 15%; height: 70%; float: left; 
+		background: orange; }
+.footer { width: 100%; height: 15%; clear: both; 
+		background: plum; }
+</style>
+</head>
+	
+<body>
+<header class="header">header</header>
+
+	<h1>1장 홈페이지 만들기</h1>
+	<h2>1절 HTML 언어</h2>
+	<h3>1. 웹</h3>
+	<h4>1.1 인터넷</h4>
+	<h5>1.1.1 네트워크</h5>
+	<h6>1.1.1.1. 통신</h6>
+	
+	<p>
+	HTML 문서도  본문을 여러 단락으로 
+	나눌 수 있다. CSS 스타일을 사용하면 
+	단락 단위로 내어 쓰기와 들여 쓰기가 가능하다.</p>
+	<p>
+	여러 개의 빈 칸은 하나로 취급되며,
+	엔터 키 역시 하나의 빈 칸으로 처리된다.</p>
+	
+	<!-- 리스트 -->
+	<h3>내가 사는 이유</h3>
+	<hr>
+	<ul>
+		<li>내가 좋아하는 음식 많아요
+		<ul>
+			<li>감자탕
+			<li>스파게티
+			<li>올레국수
+		</ul>
+		<li>라면 먹기 좋아해요
+		<ol type="1" >
+			<li>물을 끓인다.
+			<li>라면과 스프를 넣는다.
+			<li>파를 썰어 넣는다.
+			<li>한 입에 다 먹는다.
+		</ol>
+		<li>여름에는 바다로
+		<li>가을에는 산으로
+	</ul>
+	<dl>
+	<dt><strong>Internet Explorer</strong>
+	<dd>마이크로소프트에서 만든 브라우저로
+				현재 국내 시장에서 가장 많이 사용
+	<dt><strong>Firefox</strong>
+	<dd>Mozilla 재단에서 오픈 소스로 만든
+				것으로 W3C의 	웹 표준을 선도
+	<dt><strong>Chrome</strong>
+	<dd>구글에서 만든 것으로 좋은 디버거를
+				갖추고 있어 디버깅에 많이 사용
+	</dl>
+	
+	<!-- 표 (2장 30p) -->
+	<table border="1"> 
+		<caption>1학기 성적</caption>
+		<thead>
+			<tr><th>이름</th><th>HTML</th><th>CSS</th></tr>
+		</thead>
+		<tfoot>
+			<tr><th>합</th><th>225</th><th>230</th></tr>
+		</tfoot>
+		<tbody>
+			<tr><td>황기태</td><td>80</td><td>70</td></tr>
+			<tr><td>이재문</td><td>95</td><td>99</td></tr>
+			<tr><td>이병은</td><td>40</td><td>61</td></tr>
+		</tbody>
+	</table> 
+
+	<!-- 하이퍼링크 (2장 30p) -->
+	<ul>
+		<li><a href="http://www.naver.com">네이버</a></li>
+		<li><a href="main.html">main.html</a></li>
+		<li><a href="text.txt" download>main.html 다운로드</a>
+	</ul>
+
+<iframe src="iframe1.html" width="200" height="150">
+</iframe>
+<iframe src="iframe2.html" width="200" height="100">
+</iframe>
+
+</body>
+	
+</html>
