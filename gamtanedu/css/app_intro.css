@@ -1,0 +1,29 @@
+.app_intro{
+	margin-top: 58px; 
+	padding-top: 68px; 
+	text-align: center; 
+	background:#eee
+}
+
+.app_intro .desc .txt01{
+	font-size: 36px;
+}
+
+.app_intro .desc .txt02{
+	margin-top: 13px; 
+	line-height: 1.35; 
+	color: #555;
+}
+
+.app_intro .btns{
+	margin-top: 44px; 
+	font-size: 0;
+}
+
+.app_intro .btns .btn{
+	margin: 1px 2px;
+}
+
+.app_intro .visual{
+	margin-top: 27px;
+}

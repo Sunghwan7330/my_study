@@ -1,0 +1,19 @@
+.footer{
+	float: left;
+}
+
+.footer p{
+	font-size: 13px; 
+	line-height: 21px; 
+	color: #808080;
+}
+
+.footer .copyright{
+	margin-top: 10px; 
+	color: #a6a6a6;
+}
+
+.foot_menu{
+	float: right;
+	border: 1px solid #ccc;
+}
