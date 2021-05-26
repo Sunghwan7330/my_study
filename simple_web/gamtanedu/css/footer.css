@@ -1,4 +1,5 @@
 .footer{
+	margin: 10px; 
 	float: left;
 }
 
@@ -9,7 +10,6 @@
 }
 
 .footer .copyright{
-	margin-top: 10px; 
 	color: #a6a6a6;
 }
 
