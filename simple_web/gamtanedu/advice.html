@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> 감탄교육 </title>
+  <link rel="stylesheet", href="css/header.css">
+  <link rel="stylesheet", href="css/default.css">
+  <link rel="stylesheet", href="css/app_intro.css">
+  <link rel="stylesheet", href="css/footer.css">
+  <link rel="stylesheet", href="css/advice_form.css">
+  <script src="default.js"></script>
+  <script>
+  function send_advice() {
+	alert('문의가 전송되었습니다.')
+	document.getElementById("userName").value = ''
+	document.getElementById("userNum").value = ''
+	document.getElementById("userEmail").value = ''
+	document.getElementById("subject").value = ''
+	document.getElementById("conts").value = ''
+  }
+  </script>
+</head>
+	
+<body>
+
+<div id="header_menu">
+    <nav>
+      <ul>
+	  <li class="home"><a href="index.html">감탄교육</a></li>
+        <li class="dropdown">
+          <div class="dropdown-menu">학원 소개</div>
+          <div class="dropdown-content">
+            <a href="javascript:ready_alert()">인사말</a>
+            <a href="javascript:ready_alert()">강사소개</a>
+            <a href="javascript:ready_alert()">오시는길</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <div class="dropdown-menu">수업 프로그램</div>
+          <div class="dropdown-content">
+            <a href="javascript:ready_alert()">입학안내</a>
+            <a href="javascript:ready_alert()">시간표</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <div class="dropdown-menu">상담신청</div>
+          <div class="dropdown-content">
+             <a href="advice.html">상담신청</a>
+          </div>
+        </li>   
+      </ul>
+    </nav>
+</div>
+
+<div class="inner">
+	<div class="intro_txt">
+		<p>상담 및 테스트 문의</p>
+	</div>
+	<div class="board_write">
+		<table>
+			<colgroup>
+				<col style="width: 25%">
+				<col style="width: auto;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row"><label for="userName">성함</label></th>
+					<td><input type="text" id="userName"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="userNum">연락처</label></th>
+					<td><input type="text" id="userNum"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="userEmail">이메일</label></th>
+					<td><input type="text" id="userEmail"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="subject">제목</label></th>
+					<td><input type="text" id="subject"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="conts">내용</label></th>
+					<td><textarea id="conts"></textarea></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="btn_wrap">
+		<button type="button" class="btn btn-st01" onclick="send_advice()">문의하기</button>
+	</div>
+</div>
+
+<div class="inner">
+	<div class="footer">
+		<p class="addr">인천광역시 연수구 앵고개로 260 , 401~402호 (동춘동)</p>
+		<p class="tel">TEL. 010-9480-3585
+		</p><p class="copyright">Copyright© STUDYGYM Co., Ltd. All Rights Reserved.</p>
+	</div>
+</div>
+	
+</body>
+	
+</html>
