@@ -8,45 +8,24 @@
   <script src="default.js"></script>
 </head>
 	
-<body>
-
-<div id="header_menu">
-    <nav>
-      <ul>
-	  <li class="home"><a href="index.html">감탄교육</a></li>
-        <li class="dropdown">
-          <div class="dropdown-menu">학원 소개</div>
-          <div class="dropdown-content">
-            <a href="javascript:ready_alert()">인사말</a>
-            <a href="teacher_info.html">강사소개</a>
-            <a href="javascript:ready_alert()">오시는길</a>
-          </div>
-        </li>
-        <li class="dropdown">
-          <div class="dropdown-menu">수업 프로그램</div>
-          <div class="dropdown-content">
-            <a href="javascript:ready_alert()">입학안내</a>
-            <a href="javascript:ready_alert()">시간표</a>
-          </div>
-        </li>
-        <li class="dropdown">
-          <div class="dropdown-menu">상담신청</div>
-          <div class="dropdown-content">
-             <a href="advice.html">상담신청</a>
-          </div>
-        </li>   
-      </ul>
-    </nav>
-</div>
-
-<div class="inner">
-	<div class="footer">
-		<p class="addr">인천광역시 연수구 앵고개로 260 , 401~402호 (동춘동)</p>
-		<p class="tel">TEL. 010-9480-3585
-		</p><p class="copyright">Copyright© STUDYGYM Co., Ltd. All Rights Reserved.</p>
-	</div>
-</div>
+<frameset cols="40%, 60%">
+	<frame src="teacher_img.html" frameborder=0  />
+	<frameset rows="70%, 30%">
+		<frame src="teacher_text.html" frameborder=0/>
+		<frame name="content" src="teacher_list.html" frameborder=0/>
+	</frameset>
 	
-</body>
+	<noframes>
+    <body>
+      <p>This frameset document contains:</p>
+      <ul>
+        <li><a href="contents_of_frame1.html">contents_of_frame1.html</a></li>
+        <li><a href="contents_of_frame2.html">contents_of_frame1.html</a></li>
+        <li><a href="contents_of_frame3.html">contents_of_frame1.html</a></li>
+      </ul>
+    </body>
+  </noframes>
+</frameset>
+
 	
 </html>
