@@ -17,7 +17,12 @@ overflow: hidden;
 
 .thumbnail-wrapper {
 	text-align: center; 
+	transition : transform 1s
 }
+.thumbnail-wrapper:hover {
+	transform : scale(1.1,1.1);
+}
+
 img { 
 	max-width: 100%;
 	height: auto; 

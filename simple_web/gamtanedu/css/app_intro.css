@@ -22,6 +22,10 @@
 .app_intro .btns{
 	margin-top: 44px; 
 	font-size: 0;
+	transition : transform 1s
+}
+.app_intro .btns:hover{
+	transform : scale(1.2,1.2);
 }
 
 .app_intro .btns .btn{
