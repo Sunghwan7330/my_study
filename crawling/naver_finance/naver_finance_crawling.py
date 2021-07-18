@@ -2,15 +2,14 @@ import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 
-data_res = []
 
-def add_finance_info(url_str):
+def add_finance_info(writer, sheet_name, url_str):
+    data_res = []
 
     page = requests.get(url_str)
-    soup = bs(page.text, "html.parser")
+    soup = bs(page.text, "html.parser")    
+    elements = soup.select('#contentarea > div:nth-child(5) > table > tbody > tr > td.name ')
 
-    elements = soup.select('#contentarea > div:nth-child(5) > table > tbody > tr > td.name')
-    
     for index, element in enumerate(elements, 1):
         data_arr = []
         data_arr.append(element.text)
@@ -27,14 +26,16 @@ def add_finance_info(url_str):
 
         data_res.append(data_arr)
 
+        df = pd.DataFrame(data_res)
+        print(df)
 
+        df.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+
+
+# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    writer = pd.ExcelWriter('/Users/shanechoi/Desktop/REF/123.xlsx', engine='xlsxwriter')
 
-    add_finance_info("https://finance.naver.com/sise/sise_group_detail.nhn?type=theme&no=30")
-    add_finance_info("https://finance.naver.com/sise/sise_group_detail.nhn?type=theme&no=486")
-    add_finance_info("https://finance.naver.com/sise/sise_group_detail.nhn?type=theme&no=164")
-
-    df = pd.DataFrame(data_res)
-    print(df)
-
-    df.to_excel("sample.xlsx", sheet_name='new_name', index=False, header=False)
+    res = add_finance_info(writer, "sheet1", "https://finance.naver.com/sise/sise_group_detail.nhn?type=theme&no=30")
+    res = add_finance_info(writer, "sheet2", "https://finance.naver.com/sise/sise_group_detail.nhn?type=theme&no=486")
+    writer.save()
