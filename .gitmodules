@@ -1,0 +1,3 @@
+[submodule "xdp-tutorial/libbpf"]
+	path = xdp-tutorial/libbpf
+	url = https://github.com/libbpf/libbpf.git
