@@ -7,9 +7,12 @@
 
 #include "led_driver.h"
 
+uint16_t virtualLeds;
+
 /* These functions will be used to initialize
    and clean resources up after each test run */
 int setup (void ** state) {
+  LedDriver_Create(&virtualLeds);
   print_message("CMocka setup\n");
   return 0;
 }
@@ -20,23 +23,34 @@ int teardown (void ** state) {
 }
 
 void LedsOffAfterCreate(void ** state) {
-  uint16_t virtualLeds = 0xffff;
+  virtualLeds = 0xffff;
   LedDriver_Create(&virtualLeds);
   assert_int_equal(0, virtualLeds);
 }
 
+void TurnOnLedOn(void ** state) {
+  LedDriver_TurnOn(1);
+  assert_int_equal(1, virtualLeds);
+}
+
+void TurnOnLedOff(void ** state) {
+  LedDriver_TurnOn(1);
+  LedDriver_TurnOff(1);
+  assert_int_equal(0, virtualLeds);
+}
 
 int main (void) {
-    const struct CMUnitTest tests [] =
+  const struct CMUnitTest tests [] =
     {
-        cmocka_unit_test (LedsOffAfterCreate),
+      cmocka_unit_test (LedsOffAfterCreate),
+      cmocka_unit_test (TurnOnLedOn),
+	  cmocka_unit_test (TurnOnLedOff),
     };
 
-    /* If setup and teardown functions are not
-       needed, then NULL may be passed instead */
+  /* If setup and teardown functions are not
+    needed, then NULL may be passed instead */
 
-    int count_fail_tests =
-        cmocka_run_group_tests (tests, setup, teardown);
+  int count_fail_tests = cmocka_run_group_tests (tests, setup, teardown);
 
-    return count_fail_tests;
+  return count_fail_tests;
 }
