@@ -13,12 +13,10 @@ uint16_t virtualLeds;
    and clean resources up after each test run */
 int setup (void ** state) {
   LedDriver_Create(&virtualLeds);
-  print_message("CMocka setup\n");
   return 0;
 }
 
 int teardown (void ** state) {
-  print_message("CMocka teardown\n");
   return 0;
 }
 
@@ -28,7 +26,7 @@ void LedsOffAfterCreate(void ** state) {
   assert_int_equal(0, virtualLeds);
 }
 
-void TurnOnLedOn(void ** state) {
+void TurnOnLedOne(void ** state) {
   LedDriver_TurnOn(1);
   assert_int_equal(1, virtualLeds);
 }
@@ -39,12 +37,39 @@ void TurnOnLedOff(void ** state) {
   assert_int_equal(0, virtualLeds);
 }
 
+void TurnOnMultipleLeds (void ** state) {
+  LedDriver_TurnOn(9);
+  LedDriver_TurnOn(8);
+  assert_int_equal(0x180, virtualLeds);
+}
+
+void TurnOffAnyLed (void ** state) {
+  LedDriver_TurnAllOn();
+  LedDriver_TurnOff(8);
+  assert_int_equal(0xff7f, virtualLeds);
+}
+
+void AllOn (void ** state) {
+  LedDriver_TurnAllOn();
+  assert_int_equal(0xffff, virtualLeds);
+}
+
+void LedMemoryIsNotReadable (void ** state) {
+  virtualLeds = 0xffff;
+  LedDriver_TurnOn(8);
+  assert_int_equal(0x80, virtualLeds);
+}
+
 int main (void) {
   const struct CMUnitTest tests [] =
     {
-      cmocka_unit_test (LedsOffAfterCreate),
-      cmocka_unit_test (TurnOnLedOn),
-	  cmocka_unit_test (TurnOnLedOff),
+      cmocka_unit_test_setup_teardown (LedsOffAfterCreate, setup, teardown),
+      cmocka_unit_test_setup_teardown (TurnOnLedOne, setup, teardown),
+	  cmocka_unit_test_setup_teardown (TurnOnLedOff, setup, teardown),
+	  cmocka_unit_test_setup_teardown (TurnOnMultipleLeds, setup, teardown),
+	  cmocka_unit_test_setup_teardown (TurnOffAnyLed, setup, teardown),
+	  cmocka_unit_test_setup_teardown (AllOn, setup, teardown),
+	  cmocka_unit_test_setup_teardown (LedMemoryIsNotReadable, setup, teardown),
     };
 
   /* If setup and teardown functions are not
