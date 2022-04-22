@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 #include "led_driver.h"
+#include "RuntimeErrorStub.h"
 
 uint16_t virtualLeds;
 
@@ -60,6 +61,38 @@ void LedMemoryIsNotReadable (void ** state) {
   assert_int_equal(0x80, virtualLeds);
 }
 
+void UpperAndLowerBounds (void** state) {
+  LedDriver_TurnOn(1);
+  LedDriver_TurnOn(16);
+  assert_int_equal(0x8001, virtualLeds);
+}
+
+void OutOfBoundsChangesNothing (void** state) {
+  LedDriver_TurnOn(-1);
+  LedDriver_TurnOn(0);
+  LedDriver_TurnOn(1);
+  LedDriver_TurnOn(2);
+  LedDriver_TurnOn(17);
+  LedDriver_TurnOn(33);
+  LedDriver_TurnOn(3141);
+  assert_int_equal(3, virtualLeds);
+}
+
+void OutOfBoundsTurnOffDoesNoHarm (void** state) {
+  LedDriver_TurnAllOn();
+  LedDriver_TurnOff(-1);
+  LedDriver_TurnOff(0);
+  LedDriver_TurnOff(17);
+  LedDriver_TurnOff(3141);
+  assert_int_equal(0xffff, virtualLeds);
+}
+
+void OutOfBoundsProducesRuntimeError (void** state) {
+  LedDriver_TurnOn(-1);
+  assert_string_equal("LED Driver: out-of-bounds LED", RuntimeErrorStub_GetLastError());
+  assert_int_equal(-1, RuntimeErrorStub_GetLastParameter());
+}
+
 int main (void) {
   const struct CMUnitTest tests [] =
     {
@@ -70,6 +103,10 @@ int main (void) {
 	  cmocka_unit_test_setup_teardown (TurnOffAnyLed, setup, teardown),
 	  cmocka_unit_test_setup_teardown (AllOn, setup, teardown),
 	  cmocka_unit_test_setup_teardown (LedMemoryIsNotReadable, setup, teardown),
+	  cmocka_unit_test_setup_teardown (UpperAndLowerBounds, setup, teardown),
+	  cmocka_unit_test_setup_teardown (OutOfBoundsChangesNothing, setup, teardown),
+	  cmocka_unit_test_setup_teardown (OutOfBoundsTurnOffDoesNoHarm, setup, teardown),
+	  cmocka_unit_test_setup_teardown (OutOfBoundsProducesRuntimeError, setup, teardown),
     };
 
   /* If setup and teardown functions are not
