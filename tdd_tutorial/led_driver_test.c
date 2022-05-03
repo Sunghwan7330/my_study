@@ -93,6 +93,25 @@ void OutOfBoundsProducesRuntimeError (void** state) {
   assert_int_equal(-1, RuntimeErrorStub_GetLastParameter());
 }
 
+void IsOn(void** state) {
+  assert_int_equal(0, (LedDriver_IsOn(11)));
+  LedDriver_TurnOn(11);
+  assert_int_equal(1, (LedDriver_IsOn(11)));
+}
+
+void OutOfBoundsLedsAreAlwaysOff (void** state) {
+	assert_int_equal(1, LedDriver_IsOff(0));
+	assert_int_equal(1, LedDriver_IsOff(17));
+	assert_int_equal(0, LedDriver_IsOn(0));
+	assert_int_equal(0, LedDriver_IsOn(17));
+}
+
+void IsOff (void** state) {
+  assert_int_equal(1, LedDriver_IsOff(12));
+  LedDriver_TurnOn(12);
+  assert_int_equal(0, LedDriver_IsOff(12));
+}
+
 int main (void) {
   const struct CMUnitTest tests [] =
     {
@@ -107,6 +126,9 @@ int main (void) {
 	  cmocka_unit_test_setup_teardown (OutOfBoundsChangesNothing, setup, teardown),
 	  cmocka_unit_test_setup_teardown (OutOfBoundsTurnOffDoesNoHarm, setup, teardown),
 	  cmocka_unit_test_setup_teardown (OutOfBoundsProducesRuntimeError, setup, teardown),
+	  cmocka_unit_test_setup_teardown (IsOn, setup, teardown),
+	  cmocka_unit_test_setup_teardown (OutOfBoundsLedsAreAlwaysOff, setup, teardown),
+	  cmocka_unit_test_setup_teardown (IsOff, setup, teardown),
     };
 
   /* If setup and teardown functions are not
