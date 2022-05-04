@@ -112,6 +112,19 @@ void IsOff (void** state) {
   assert_int_equal(0, LedDriver_IsOff(12));
 }
 
+void TurnOffMultipleLeds (void** state) {
+  LedDriver_TurnAllOn();
+  LedDriver_TurnOff(9);
+  LedDriver_TurnOff(8);
+  assert_int_equal((~0x180)&0xffff, virtualLeds);
+}
+
+void AllOff (void** staate) {
+  LedDriver_TurnAllOn();
+  LedDriver_TurnAllOff();
+  assert_int_equal(0, virtualLeds);
+}
+
 int main (void) {
   const struct CMUnitTest tests [] =
     {
@@ -129,6 +142,8 @@ int main (void) {
 	  cmocka_unit_test_setup_teardown (IsOn, setup, teardown),
 	  cmocka_unit_test_setup_teardown (OutOfBoundsLedsAreAlwaysOff, setup, teardown),
 	  cmocka_unit_test_setup_teardown (IsOff, setup, teardown),
+	  cmocka_unit_test_setup_teardown (TurnOffMultipleLeds, setup, teardown),
+	  cmocka_unit_test_setup_teardown (AllOff, setup, teardown),
     };
 
   /* If setup and teardown functions are not
