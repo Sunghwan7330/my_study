@@ -1,5 +1,23 @@
-# 리팩터링 2판 1장 예시 초안
-# javascript 코드를 python으로 변경하여 구현
+# 리팩터링 2판 1장 예시 1
+# statement 함수 내부의 장르별 if 문을 별도 함수로 분리 
+
+def amountFor(perf, play): # 값이 바뀌지 않는 변수는 파라메타로 전달
+    thisAmount = 0  # 변수 초기화 코드 
+
+    if play['type'] == 'tragedy': #비극
+        thisAmount = 40000
+        if perf['audience'] > 30:
+            thisAmount += 1000 * (perf['audience'] - 30)
+    elif play['type'] == "comedy": #비극
+        thisAmount = 30000
+        if perf['audience'] > 20:
+            thisAmount += 10000 + 500 * (perf['audience'] - 20)
+        thisAmount += 300 * perf['audience']
+    else:
+        return -1
+    
+    return thisAmount  # 함수 안에서 값이 바뀌는 변수 반환
+
 
 def statement(invoice, plays):
     totalAmount = 0
@@ -8,18 +26,7 @@ def statement(invoice, plays):
     creditFormat = ',.2f'
     for perf in invoice['performances']:
         play = plays[perf['playID']]
-        thisAmount = 0
-        if play['type'] == 'tragedy': #비극
-            thisAmount = 40000
-            if perf['audience'] > 30:
-                thisAmount += 1000 * (perf['audience'] - 30)
-        elif play['type'] == "comedy": #비극
-            thisAmount = 30000
-            if perf['audience'] > 20:
-                thisAmount += 10000 + 500 * (perf['audience'] - 20)
-            thisAmount += 300 * perf['audience']
-        else:
-            return '알 수 없는 장르: %s' % play['type']
+        thisAmount = amountFor(perf, play)
 
         # 포인트를 적립한다.
         volumeCredits += max(perf['audience'] - 30, 0)

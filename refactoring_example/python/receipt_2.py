@@ -1,4 +1,4 @@
-# 리팩터링 2판 1장 예시 초안
+# 리팩터링 2판 1장 예시 1
 # javascript 코드를 python으로 변경하여 구현
 
 def statement(invoice, plays):
