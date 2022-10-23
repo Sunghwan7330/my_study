@@ -1,0 +1,8 @@
+{
+  "excel_file" : "test.xlsx",
+  "search_list_file" : "search_list.txt",
+  "select_sheet" : "Sheet1",
+  "key_column" : "id",
+  "write_file" : "result.xlsx",
+  "debug_message" : true
+}
