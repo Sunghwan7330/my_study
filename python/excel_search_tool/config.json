@@ -1,8 +1,9 @@
 {
   "excel_file" : "test.xlsx",
   "search_list_file" : "search_list.txt",
-  "select_sheet" : "Sheet1",
-  "key_column" : "id",
+  "select_sheet" : "vlookup",
+  "key_column" : "CODE",
+  "is_key_integer" : false,
   "write_file" : "result.xlsx",
   "debug_message" : true
 }
