@@ -1,0 +1,90 @@
+# 리팩터링 2판 1장 예시 6
+# statement 함수에서 volumeCredits 제거하기
+
+def playFor(aPerformance):
+    plays = {
+    "hamlet": {"name": "Hamlet", "type": "tragedy"},
+    "as-like": {"name": "As You Like It", "type": "comedy"},
+    "othello": {"name": "Othello", "type": "tragedy"}
+    }
+    return plays[aPerformance['playID']]
+
+def mFormat(n):
+    return format(n, ',.2f')
+
+def amountFor(aPerformance): # 값이 바뀌지 않는 변수는 파라메타로 전달
+    result = 0  # 명확한 이름으로 변경 
+
+    type = playFor(aPerformance)['type']
+    if type == 'tragedy': #비극
+        result = 40000
+        if aPerformance['audience'] > 30:
+            result += 1000 * (aPerformance['audience'] - 30)
+    elif type == "comedy": #비극
+        result = 30000
+        if aPerformance['audience'] > 20:
+            result += 10000 + 500 * (aPerformance['audience'] - 20)
+        result += 300 * aPerformance['audience']
+    else:
+        return -1
+    
+    return result  # 함수 안에서 값이 바뀌는 변수 반환
+
+
+def volumeCreditsFor(perf):
+    volumeCredits = 0
+
+    volumeCredits += max(perf['audience'] - 30, 0)
+    # 희극 관객 5명마다 추가 포인트를 제공한다.
+    if "comedy" == playFor(perf)['type']:
+        volumeCredits += perf['audience'] // 5
+
+    return volumeCredits
+
+
+def toalVolumCrdits(invoice):
+    volumeCredits = 0
+
+    for perf in invoice['performances']:
+        volumeCredits += volumeCreditsFor(perf)
+
+    return volumeCredits
+
+def statement(invoice):
+    totalAmount = 0
+    result = '청구 내역 (고객명: {})\n'.format(invoice['customer'])
+    for perf in invoice['performances']:
+        thisAmount = amountFor(perf)
+        
+        # 청구 내역을 출력한다.
+        result += ' {}: ${} ({}석)\n'.format(playFor(perf)['name'], mFormat(thisAmount//100), perf['audience'])
+        totalAmount += thisAmount
+    volumeCredits = toalVolumCrdits(invoice)
+    result += '총액: ${}\n'.format(mFormat(totalAmount//100))
+    result += '적립 포인트: {}점\n'.format(volumeCredits)
+    return result
+
+def main():
+    invoice = {
+        "customer": "BigCo",
+        "performances": [
+            {
+                "playID": "hamlet",
+                "audience": 55
+            },
+            {
+                "playID": "as-like",
+                "audience": 35
+            },
+            {
+                "playID": "othello",
+                "audience": 40
+            }
+        ]
+    }
+
+    print(statement(invoice))
+    return
+
+if __name__ == '__main__':
+    main()
