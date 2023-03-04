@@ -13,6 +13,12 @@ public class MainController {
     public String getMain(@AuthenticationPrincipal OAuth2User oAuth2User) {
         log.info("로그인 된 유저:  " + oAuth2User);
 
-        return "main";
+        return "index";
+    }
+
+    // 제대로 로그인이 되었는지 확인하는 요청
+    @GetMapping("/check")
+    public String getCheck() {
+        return "Authorized!";
     }
 }
