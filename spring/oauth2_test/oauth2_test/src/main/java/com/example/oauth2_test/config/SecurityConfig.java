@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutUrl("/direct_logout")
                 .logoutSuccessUrl("/")	// 로그아웃에 대해서 성공하면 "/"로 이동
                 .and()
                 .oauth2Login()
