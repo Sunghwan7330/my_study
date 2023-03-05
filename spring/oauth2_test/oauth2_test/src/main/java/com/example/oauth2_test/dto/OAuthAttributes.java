@@ -11,15 +11,15 @@ import java.util.Map;
 @Log4j2
 @NoArgsConstructor
 public class OAuthAttributes {
-    private String connectPlatform;
+    private String platform;
     private Map<String, Object> attributes;
     private String nameAttributeKey;
     private String name;
     private String email;
     private String picture;
 
-    public OAuthAttributes(String connectPlatform, Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture) {
-        this.connectPlatform = connectPlatform;
+    public OAuthAttributes(String platform, Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture) {
+        this.platform = platform;
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
@@ -86,6 +86,6 @@ public class OAuthAttributes {
     }
 
     public User toEntity() {
-        return new User(name, email, picture);
+        return new User(platform, name, email, picture);
     }
 }

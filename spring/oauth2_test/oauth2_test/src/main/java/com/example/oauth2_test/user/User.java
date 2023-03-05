@@ -13,6 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String platform;
     @Column(nullable = false)
     private String name;
 
@@ -21,13 +22,15 @@ public class User {
     private String picture;
     private String role = "ROLE_USER";
 
-    public User(String name, String email, String picture) {
+    public User(String platform, String name, String email, String picture) {
+        this.platform = platform;
         this.name = name;
         this.email = email;
         this.picture = picture;
     }
 
-    public User update(String name, String picture) {
+    public User update(String platform, String name, String picture) {
+        this.platform = platform;
         this.name = name;
         this.picture = picture;
 
