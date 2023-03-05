@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>접속 정보</h1>
+    <img th:src="${user_info.picture}"><br>
+    <a>platform : </a><a th:text="${user_info.connectPlatform}"></a><br>
+    <a>name : </a><a th:text="${user_info.name}"></a><br>
+    <a>email : </a><a th:text="${user_info.email}"></a><br>
+</body>
+</html>
