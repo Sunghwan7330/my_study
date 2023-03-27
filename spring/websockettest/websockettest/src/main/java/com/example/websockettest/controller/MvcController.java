@@ -3,6 +3,7 @@ package com.example.websockettest.controller;
 import com.example.websockettest.handler.WebSocketHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -18,38 +19,24 @@ public class MvcController {
 
     public WebSocketSession getSession(String name) {
         HashMap<String, WebSocketSession> hashMap = WebSocketHandler.sessionMap;
-        if(!hashMap.containsKey(name)) {
+        if(!hashMap.containsKey(name))  return null;
+        WebSocketSession session = hashMap.get(name);
+        if (!session.isOpen()) {
+            hashMap.remove(name);
             return null;
-
         }
-        return hashMap.get("123");
+
+        return session;
     }
 
-    @GetMapping("/img1")
-    public String img1() throws Exception {
-        WebSocketSession session = getSession("123");
+    @GetMapping("/imgControl/{name}/{image}")
+    public String imgControl( @PathVariable String name, @PathVariable String image) throws Exception {
+        WebSocketSession session = getSession(name);
         if (session != null) {
-            session.sendMessage(new TextMessage("./images/muzi.gif"));
+            session.sendMessage(new TextMessage(image));
         }
 
         return "webSocket";
     }
-    @GetMapping("/img2")
-    public String img2() throws Exception {
-        WebSocketSession session = getSession("123");
-        if (session != null) {
-            session.sendMessage(new TextMessage("./images/ryon.png"));
-        }
 
-        return "webSocket";
-    }
-    @GetMapping("/img3")
-    public String img3() throws Exception {
-        WebSocketSession session = getSession("123");
-        if (session != null) {
-            session.sendMessage(new TextMessage("./images/tube.png"));
-        }
-
-        return "webSocket";
-    }
 }

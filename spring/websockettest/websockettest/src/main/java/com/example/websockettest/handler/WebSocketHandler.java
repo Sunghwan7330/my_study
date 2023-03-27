@@ -6,7 +6,6 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Log4j2
 public class WebSocketHandler extends TextWebSocketHandler {

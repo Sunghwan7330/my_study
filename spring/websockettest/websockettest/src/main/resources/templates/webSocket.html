@@ -73,10 +73,9 @@
 
     function writeResponse(text){
         messages.innerHTML += "<br/>" + text;
-        document.getElementById("img").src = "./images/tube.png";
     }
     function setImage(path) {
-        document.getElementById("img").src = path;
+        document.getElementById("img").src = "./images/" + path;
     }
 
 </script>
