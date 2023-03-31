@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Echo Web Socket</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<div>
+    <input type="text" id="messageinput"/>
+</div>
+<div>
+    <button type="button" onclick="openSocket();" >Open</button>
+    <button type="button" onclick="send();" >Send</button>
+    <button type="button" onclick="closeSocket();" >Close</button>
+</div>
+<div>
+    <img id="img">
+</div>
+<!-- la risposta del server viene scritta quì -->
+<div id="messages"></div>
+
+<!-- Script che utilizza i WebSocket -->
+<script type="text/javascript">
+
+    var webSocket;
+    var messages = document.getElementById("messages");
+
+    var stompClient;
+
+
+    function openSocket(){
+        var socket = new SockJS('/users')
+        stompClient = Stomp.over(socket)
+        stompClient.connect({}, function(frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/a', function(response) {
+                console.log(response)
+                console.log(JSON.parse(response.body));
+            });
+        })
+    }
+
+    /**
+     * Invia il contenuto della text input al server
+     */
+    function send(){
+        //var text = document.getElementById("messageinput").value;
+        //webSocket.send(text);
+        console.log("sending")
+        var text = document.getElementById("messageinput").value;
+        stompClient.send("/app/user", {}, JSON.stringify({name : text}));
+    }
+
+    function closeSocket(){
+        webSocket.close();
+    }
+
+    function writeResponse(text){
+        messages.innerHTML += "<br/>" + text;
+    }
+    function setImage(path) {
+        document.getElementById("img").src = "./images/" + path;
+    }
+
+</script>
+</body>
+</html>
