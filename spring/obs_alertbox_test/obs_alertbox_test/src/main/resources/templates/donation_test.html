@@ -14,6 +14,10 @@
   <input type="text" id="imagepath"/>
 </div>
 <div>
+    message :
+    <input type="text" id="message"/>
+</div>
+<div>
   <button type="button" onclick="send();" >Send</button>
 </div>
 
@@ -23,11 +27,15 @@
   function send() {
     var token = document.getElementById("token").value;
     var imagepath = document.getElementById("imagepath").value;
+    var msg = document.getElementById("message").value;
     console.log("token : " + token)
     console.log("imagepath : " + imagepath)
+    console.log("msg : " + msg)
+
     const data = {
       token: token,
-      imagePath: imagepath
+      imagePath: imagepath,
+      donationMessage: msg
     };
     fetch(apiUrl, {
       method: 'POST',

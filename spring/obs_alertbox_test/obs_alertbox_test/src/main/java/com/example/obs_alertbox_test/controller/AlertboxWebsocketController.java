@@ -20,8 +20,10 @@ public class AlertboxWebsocketController {
     public @ResponseBody void sendData (@RequestBody DonationInfoDto donationInfo){
         log.info(donationInfo.getToken());
         log.info(donationInfo.getImagePath());
+        log.info(donationInfo.getDonationMessage());
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("image_path", donationInfo.getImagePath());
+        payload.put("donation_message", donationInfo.getDonationMessage());
         simpMessagingTemplate.convertAndSend("/donationinfo/" + donationInfo.getToken(), payload);
     }
 

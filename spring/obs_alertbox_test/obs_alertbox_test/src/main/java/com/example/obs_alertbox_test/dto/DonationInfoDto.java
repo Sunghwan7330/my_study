@@ -6,4 +6,5 @@ import lombok.Data;
 public class DonationInfoDto {
     private String token;
     private String imagePath;
+    private String donationMessage;
 }

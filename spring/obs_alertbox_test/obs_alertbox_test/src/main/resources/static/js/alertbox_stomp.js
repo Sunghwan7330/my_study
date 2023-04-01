@@ -24,6 +24,7 @@ function openSocket(){
         stompClient.subscribe('/donationinfo/' + token, function(response) {
             donationInfo = JSON.parse(response.body)
             setImage(donationInfo.image_path)
+            setMessage(donationInfo.donation_message)
         });
     })
 }
@@ -37,3 +38,7 @@ function send(){
 function setImage(path) {
     document.getElementById("donationImage").src = path;
 }
+function setMessage(msg) {
+    document.getElementById("donationMessage").innerText = msg;
+}
+
