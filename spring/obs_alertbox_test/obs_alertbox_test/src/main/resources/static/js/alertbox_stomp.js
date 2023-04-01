@@ -1,8 +1,9 @@
-
 var stompClient;
-
 var token = getTokenFromPathname()
-//console.log(token)
+
+window.onload = function(){
+        openSocket()
+    }
 
 function getTokenFromPathname() {
     split_path = window.location.pathname.split("/") // value : /alertbox/{token}
@@ -16,33 +17,23 @@ function getTokenFromPathname() {
 function openSocket(){
     if (token == null)  return
 
-    var socket = new SockJS('/users')
+    var socket = new SockJS('/alertbox')
     stompClient = Stomp.over(socket)
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/' + token, function(response) {
+        stompClient.subscribe('/donationinfo/' + token, function(response) {
             donationInfo = JSON.parse(response.body)
-            //console.log(response)
-            //console.log(JSON.parse(response.body));
-            //console.log(donationInfo)
             setImage(donationInfo.image_path)
         });
     })
 }
 
+// client 에서 메시지 보낼 일이 있을지 모르겠지만, 혹시 몰라서 남겨둠.
 function send(){
-    console.log("sending")
     var text = document.getElementById("messageinput").value;
     stompClient.send("/app/user", {}, JSON.stringify({name : text}));
 }
 
-function closeSocket(){
-    webSocket.close();
-}
-
-function writeResponse(text){
-    messages.innerHTML += "<br/>" + text;
-}
 function setImage(path) {
-    document.getElementById("img").src = path;
+    document.getElementById("donationImage").src = path;
 }

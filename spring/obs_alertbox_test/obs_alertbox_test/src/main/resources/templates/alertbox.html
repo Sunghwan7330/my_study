@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Echo Web Socket</title>
+    <title>Alertbox</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
@@ -9,23 +9,9 @@
 </head>
 <body>
 <div>
-    <input type="text" id="messageinput"/>
+    <img id="donationImage">
 </div>
-<div>
-    <button type="button" onclick="openSocket();" >Open</button>
-    <button type="button" onclick="send();" >Send</button>
-    <button type="button" onclick="closeSocket();" >Close</button>
-</div>
-<div>
-    <img id="img">
-</div>
-<!-- la risposta del server viene scritta quì -->
-<div id="messages"></div>
-
-<!-- Script che utilizza i WebSocket -->
-
 <script src="/js/alertbox_stomp.js"></script>
-
 </script>
 </body>
 </html>

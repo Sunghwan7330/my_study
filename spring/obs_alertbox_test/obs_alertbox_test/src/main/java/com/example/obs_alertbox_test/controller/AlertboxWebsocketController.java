@@ -22,7 +22,7 @@ public class AlertboxWebsocketController {
         log.info(donationInfo.getImagePath());
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("image_path", donationInfo.getImagePath());
-        simpMessagingTemplate.convertAndSend("/topic/" + donationInfo.getToken(), payload);
+        simpMessagingTemplate.convertAndSend("/donationinfo/" + donationInfo.getToken(), payload);
     }
 
     @GetMapping("/alertbox/{token}")
