@@ -25,7 +25,7 @@ public class AlertboxStmopConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         //the url is for Websocket handshake
         registry.addEndpoint("/users") //handshake가 될 endpoint지정
-                //.setAllowedOrigins("*") //현재 구동되고 있는 서버와 다른 도메인에서도 접근 가능하게
+                .setAllowedOriginPatterns("*") //현재 구동되고 있는 서버와 다른 도메인에서도 접근 가능하게
                 .withSockJS(); //SockJS사용
     }
 }
