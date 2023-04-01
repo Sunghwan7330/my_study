@@ -21,8 +21,11 @@ function openSocket(){
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/' + token, function(response) {
-            console.log(response)
-            console.log(JSON.parse(response.body));
+            donationInfo = JSON.parse(response.body)
+            //console.log(response)
+            //console.log(JSON.parse(response.body));
+            //console.log(donationInfo)
+            setImage(donationInfo.image_path)
         });
     })
 }
@@ -41,5 +44,5 @@ function writeResponse(text){
     messages.innerHTML += "<br/>" + text;
 }
 function setImage(path) {
-    document.getElementById("img").src = "./images/" + path;
+    document.getElementById("img").src = path;
 }
