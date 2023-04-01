@@ -1,12 +1,26 @@
 
 var stompClient;
 
+var token = getTokenFromPathname()
+//console.log(token)
+
+function getTokenFromPathname() {
+    split_path = window.location.pathname.split("/") // value : /alertbox/{token}
+    console.log(split_path)
+    if (split_path.length != 3)
+        return null
+
+    return split_path[2]
+}
+
 function openSocket(){
+    if (token == null)  return
+
     var socket = new SockJS('/users')
     stompClient = Stomp.over(socket)
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/a', function(response) {
+        stompClient.subscribe('/topic/' + token, function(response) {
             console.log(response)
             console.log(JSON.parse(response.body));
         });
