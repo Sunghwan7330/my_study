@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DonationTest</title>
+</head>
+<body>
+<div>
+  <input type="text" id="token"/>
+</div>
+<div>
+  <input type="text" id="imagepath"/>
+</div>
+<div>
+  <button type="button" onclick="send();" >Send</button>
+</div>
+
+<script type="text/javascript">
+  const apiUrl = 'http://localhost:8080/alertbox/senddata';
+
+  function send() {
+    var token = document.getElementById("token").value;
+    var imagepath = document.getElementById("imagepath").value;
+    console.log("token : " + token)
+    console.log("imagepath : " + imagepath)
+    const data = {
+      token: token,
+      imagePath: imagepath
+    };
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  }
+</script>
+
+</body>
+</html>
