@@ -1,7 +1,8 @@
 var stompClient;
 var token = getTokenFromPathname()
 
-var fadeIntervalID = 0;
+var fadeIntervalID = null;
+var fadeoutTimeoutId = null;
 
 window.onload = function(){
     openSocket()
@@ -24,14 +25,13 @@ function openSocket(){
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/donationinfo/' + token, function(response) {
-            var div = document.getElementById("main_frame");
-            div.style.opacity=0;
+            end()
 
             donationInfo = JSON.parse(response.body)
             setImage(donationInfo.image_path)
             setMessage(donationInfo.donation_message)
-            fadeIntervalID = setInterval(show,100);
-            setTimeout(end,5000);
+            fadeIn()
+            fadeoutTimeoutId = setTimeout(fadeOut,5000);
         });
     })
 }
@@ -67,7 +67,6 @@ function hide(){
     opacity = Number(window.getComputedStyle(div).getPropertyValue("opacity"));
 
     if(opacity>0){
-        //Fade out 핵심 부분
         opacity = opacity-0.1;
         div.style.opacity=opacity;
     }
@@ -75,6 +74,34 @@ function hide(){
         clearInterval(fadeIntervalID);
     }
 }
-function end() {
+
+function clearFadeInterval() {
+    if (fadeIntervalID != null) {
+        clearInterval(fadeIntervalID);
+        fadeIntervalID = null
+    }
+}
+
+function clearFadeoutTimeout() {
+    if (fadeoutTimeoutId != null) {
+        clearTimeout(fadeoutTimeoutId)
+        fadeoutTimeoutId = null
+    }
+}
+
+function fadeIn() {
+    clearFadeInterval()
+    fadeIntervalID = setInterval(show,100);
+}
+
+function fadeOut() {
+    clearFadeInterval()
     fadeIntervalID = setInterval(hide,100);
+}
+
+function end() {
+    clearFadeInterval()
+    clearFadeoutTimeout()
+    var div = document.getElementById("main_frame");
+    div.style.opacity=0;
 }
