@@ -16,7 +16,7 @@ public class AlertboxWebsocketController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @PostMapping("/alertbox/senddata")
+    @PostMapping("/alertboxdata/send")
     public @ResponseBody void sendData (@RequestBody DonationInfoDto donationInfo){
         log.info(donationInfo.getToken());
         log.info(donationInfo.getImagePath());
