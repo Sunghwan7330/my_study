@@ -1,0 +1,28 @@
+<html>
+<head>
+    <script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+<section>
+    <!-- ... -->
+    <span>총 주문금액</span>
+    <span>1000원</span>
+    <button id="payment-button">결제하기</button>
+</section>
+<script>
+      var clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq'
+      var tossPayments = TossPayments(clientKey)
+      var button = document.getElementById('payment-button') //결제하기 버튼
+      button.addEventListener('click', function () {
+        tossPayments.requestPayment('카드', {
+          amount: 1000,
+          orderId: 'uhMQj6yn6PwX64liTN82J',
+          orderName: '토스 티셔츠 외 2건',
+          customerName: '박토스',
+          successUrl: 'http://localhost:8080/toss_payment/success',
+          failUrl: 'http://localhost:8080/toss_payment/fail',
+        })
+      })
+    </script>
+</body>
+</html>

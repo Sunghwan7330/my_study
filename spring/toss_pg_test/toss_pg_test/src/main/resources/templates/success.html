@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TossPaymentSuccess</title>
+</head>
+<body>
+<span th:text="${tossPaymentDto.mId}">mId</span><br>
+<span th:text="${tossPaymentDto.version}">version</span><br>
+<span th:text="${tossPaymentDto.paymentKey}">paymentKey</span><br>
+<span th:text="${tossPaymentDto.orderId}">orderId</span><br>
+<span th:text="${tossPaymentDto.orderName}">orderName</span><br>
+<span th:text="${tossPaymentDto.currency}">currency</span><br>
+<span th:text="${tossPaymentDto.method}">method</span><br>
+<span th:text="${tossPaymentDto.status}">status</span><br>
+<span th:text="${tossPaymentDto.requestedAt}">requestedAt</span><br>
+<span th:text="${tossPaymentDto.approvedAt}">approvedAt</span><br>
+<span th:text="${tossPaymentDto.useEscrow}">useEscrow</span><br>
+<span th:text="${tossPaymentDto.cultureExpense}">cultureExpense</span><br><br>
+
+<span th:text="${tossPaymentDto.card.issuerCode}">issuerCode</span><br>
+<span th:text="${tossPaymentDto.card.acquirerCode}">acquirerCode</span><br>
+<span th:text="${tossPaymentDto.card.number}">number</span><br>
+<span th:text="${tossPaymentDto.card.installmentPlanMonths}">installmentPlanMonths</span><br>
+<span th:text="${tossPaymentDto.card.isInterestFree}">isInterestFree</span><br>
+<span th:text="${tossPaymentDto.card.interestPayer}">interestPayer</span><br>
+<span th:text="${tossPaymentDto.card.approveNo}">approveNo</span><br>
+<span th:text="${tossPaymentDto.card.useCardPoint}">useCardPoint</span><br>
+<span th:text="${tossPaymentDto.card.cardType}">cardType</span><br>
+<span th:text="${tossPaymentDto.card.ownerType}">ownerType</span><br>
+<span th:text="${tossPaymentDto.card.acquireStatus}">acquireStatus</span><br><br>
+
+<span th:text="${tossPaymentDto.virtualAccount}">virtualAccount</span><br>
+<span th:text="${tossPaymentDto.transfer}">transfer</span><br>
+<span th:text="${tossPaymentDto.mobilePhone}">mobilePhone</span><br>
+<span th:text="${tossPaymentDto.giftCertificate}">giftCertificate</span><br>
+<span th:text="${tossPaymentDto.foreignEasyPay}">foreignEasyPay</span><br>
+<span th:text="${tossPaymentDto.cashReceipt}">cashReceipt</span><br>
+<span th:text="${tossPaymentDto.discount}">discount</span><br>
+<span th:text="${tossPaymentDto.cancels}">cancels</span><br>
+<span th:text="${tossPaymentDto.secret}">secret</span><br>
+<span th:text="${tossPaymentDto.type}">type</span><br>
+<span th:text="${tossPaymentDto.easyPay}">easyPay</span><br>
+<span th:text="${tossPaymentDto.country}">country</span><br>
+<span th:text="${tossPaymentDto.failure}">failure</span><br>
+<span th:text="${tossPaymentDto.totalAmount}">totalAmount</span><br>
+<span th:text="${tossPaymentDto.balanceAmount}">balanceAmount</span><br>
+<span th:text="${tossPaymentDto.suppliedAmount}">suppliedAmount</span><br>
+<span th:text="${tossPaymentDto.vat}">vat</span><br>
+<span th:text="${tossPaymentDto.taxFreeAmount}">taxFreeAmount</span><br>
+<span th:text="${tossPaymentDto.taxExemptionAmount}">taxExemptionAmount</span><br>
+
+</body>
+</html>
