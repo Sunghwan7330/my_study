@@ -24,6 +24,7 @@ public class AlertboxWebsocketController {
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("image_path", donationInfo.getImagePath());
         payload.put("donation_message", donationInfo.getDonationMessage());
+        payload.put("donation_sound", "https://assets.mytwip.net/sounds/Coins.mp3");  //TODO 임시로 twip 소리 사용
         simpMessagingTemplate.convertAndSend("/donationinfo/" + donationInfo.getToken(), payload);
     }
 

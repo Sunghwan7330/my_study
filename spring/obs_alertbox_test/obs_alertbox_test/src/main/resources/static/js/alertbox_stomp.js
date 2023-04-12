@@ -3,6 +3,7 @@ var token = getTokenFromPathname()
 
 var fadeIntervalID = null;
 var fadeoutTimeoutId = null;
+var donationSoundAudio = new Audio();
 
 window.onload = function(){
     openSocket()
@@ -30,6 +31,7 @@ function openSocket(){
             donationInfo = JSON.parse(response.body)
             setImage(donationInfo.image_path)
             setMessage(donationInfo.donation_message)
+            playSound(donationInfo.donation_sound)
             fadeIn()
             fadeoutTimeoutId = setTimeout(fadeOut,5000);
         });
@@ -104,4 +106,11 @@ function end() {
     clearFadeoutTimeout()
     var div = document.getElementById("main_frame");
     div.style.opacity=0;
+}
+
+function playSound(src) {
+    donationSoundAudio.pause()
+    donationSoundAudio.src = src
+
+    donationSoundAudio.play()
 }
