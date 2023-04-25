@@ -3,7 +3,7 @@ var token = getTokenFromPathname()
 
 var fadeIntervalID = null;
 var fadeoutTimeoutId = null;
-var donationSoundAudio = new Audio();
+var donationSoundAudio = document.getElementById("donation_audio");
 
 window.onload = function(){
     openSocket()
@@ -31,7 +31,7 @@ function openSocket(){
             donationInfo = JSON.parse(response.body)
             setImage(donationInfo.image_path)
             setMessage(donationInfo.donation_message)
-            playSound(donationInfo.donation_sound)
+            playSound(donationInfo.donation_sound, donationInfo.tts_sound)
             fadeIn()
             fadeoutTimeoutId = setTimeout(fadeOut,5000);
         });
@@ -108,9 +108,29 @@ function end() {
     div.style.opacity=0;
 }
 
-function playSound(src) {
-    donationSoundAudio.pause()
-    donationSoundAudio.src = src
+function playSound(alarm_sound, tts_sound) {
+    if (!donationSoundAudio.paused) {
+        donationSoundAudio.pause()
+    }
+    donationSoundAudio.src = alarm_sound
+    donationSoundAudio.removeEventListener('ended', arguments.callee);
+
+    donationSoundAudio.addEventListener('ended', function() {
+        donationSoundAudio.src = tts_sound
+        donationSoundAudio.play();
+        donationSoundAudio.removeEventListener('ended', arguments.callee);
+    });
 
     donationSoundAudio.play()
+    const playPromise = donationSoundAudio.play();
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            // 자동 재생이 시작되었을 때 실행할 코드
+            donationSoundAudio.hidden = true;
+        }).catch(error => {
+            // 자동 재생이 방지되었을 때 실행할 코드
+            donationSoundAudio.hidden = false;
+        });
+    }
 }
+
