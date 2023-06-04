@@ -40,6 +40,9 @@ public class DonationInfoQueue {
         this.sendTime = sendTime;
     }
 
+    public long getDurationTime() {
+        return durationTime;
+    }
     public void setDurationTime(long durationTime) {
         this.durationTime = durationTime;
     }

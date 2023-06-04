@@ -33,7 +33,7 @@ public class DonationComponent {
 
     private static final long DEFAULT_DURATION_TIME = 3000;
     private static final long DURATION_GAP_TIME = 1000;
-    private static final long MAX_DURATION_TIME = 20000;
+    private static final long MAX_DURATION_TIME = 10000;
 
     public DonationComponent() {
         donationListHashmap = new HashMap<>();
@@ -102,13 +102,15 @@ public class DonationComponent {
             throw new RuntimeException(e);
         }
 
+        donationInfoQueue.addDurationTime(durationTime);
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("image_path", donationInfo.getImagePath());
         payload.put("donation_message", donationInfo.getDonationMessage());
         payload.put("donation_sound", "https://assets.mytwip.net/sounds/Coins.mp3");  //TODO 임시로 twip 소리 사용
         payload.put("tts_sound", "http://localhost:8080/audio/" + filename);
+        payload.put("duration_time", donationInfoQueue.getDurationTime());
         simpMessagingTemplate.convertAndSend("/donationinfo/" + donationInfo.getToken(), payload);
-        donationInfoQueue.addDurationTime(durationTime);
+
     }
 
     @Scheduled(fixedDelay = 100)

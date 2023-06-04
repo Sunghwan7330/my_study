@@ -33,7 +33,7 @@ function openSocket(){
             setMessage(donationInfo.donation_message)
             playSound(donationInfo.donation_sound, donationInfo.tts_sound)
             fadeIn()
-            fadeoutTimeoutId = setTimeout(fadeOut,5000);
+            fadeoutTimeoutId = setTimeout(fadeOut,donationInfo.duration_time);
         });
     })
 }
