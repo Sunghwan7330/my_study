@@ -3,9 +3,13 @@ pip install fastapi uvicorn sqlalchemy pymysql shapely
 
 
 # db create
-curl -X POST http://localhost:8000/places/ \
--H "Content-Type: application/json" \
--d '{"name": "Park", "latitude": 37.5, "longitude": 127.0}'
+CREATE TABLE places (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50),
+  location POINT NOT NULL,
+  SPATIAL INDEX(location)
+);
+
 
 # create
 curl -X POST http://localhost:8000/places/ \
