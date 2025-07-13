@@ -1,0 +1,24 @@
+# 사전 설치 패키지 목록
+pip install fastapi uvicorn sqlalchemy pymysql shapely
+
+
+# db create
+curl -X POST http://localhost:8000/places/ \
+-H "Content-Type: application/json" \
+-d '{"name": "Park", "latitude": 37.5, "longitude": 127.0}'
+
+# create
+curl -X POST http://localhost:8000/places/ \
+-H "Content-Type: application/json" \
+-d '{"name": "Park", "latitude": 37.5, "longitude": 127.0}'
+
+# read
+curl http://localhost:8000/places/
+
+# update
+curl -X PUT http://localhost:8000/places/1 \
+-H "Content-Type: application/json" \
+-d '{"name": "Updated Park", "latitude": 37.55, "longitude": 127.05}'
+
+# delete
+curl -X DELETE http://localhost:8000/places/1
