@@ -1,0 +1,8 @@
+# 사용자 생성
+curl -X POST "http://127.0.0.1:8000/users/" -H "Content-Type: application/json" -d '{"name":"길동","email":"gildong@example.com"}'
+
+#사용자 목록 조회
+curl "http://127.0.0.1:8000/users/"
+
+#특정 사용자 조회
+curl "http://127.0.0.1:8000/users/1"
